@@ -1,0 +1,74 @@
+<script src="js/operacoesMenuPrincipal.js"></script>
+<link rel="stylesheet" type="text/css" href="css/cssMenu.css" />
+
+    <script type="text/javascript">
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+     $("#menu-toggle-2").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled-2");
+        $('#menu ul').hide();
+    });
+ 
+     function initMenu() {
+      $('#menu ul').hide();
+      $('#menu ul').children('.current').parent().show();
+      //$('#menu ul:first').show();
+      $('#menu li a').click(
+        function() {
+          var checkElement = $(this).next();
+          if((checkElement.is('ul')) && (checkElement.is(':visible'))) {
+            return false;
+            }
+          if((checkElement.is('ul')) && (!checkElement.is(':visible'))) {
+            $('#menu ul:visible').slideUp('normal');
+            checkElement.slideDown('normal');
+            return false;
+            }
+          }
+        );
+      }
+    $(document).ready(function() {initMenu();});
+    </script>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header fixed-brand">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"  id="menu-toggle">
+                      <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">CASHPACK</a>
+                </div><!-- navbar-header-->
+ 
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li class="active" ><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
+                            </ul>
+                </div><!-- bs-example-navbar-collapse-1 -->
+    </nav>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+                <li class="active">
+                  <a href="index.html"><i class="glyphicon glyphicon-minus align-left"></i> Início</a>
+                </li>
+                <li>
+                    <a href="#" OnClick="carregarCrudUsuario();"><i class="glyphicon glyphicon-phone align-left"></i> Usuário</a>
+                       <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="#"><i class="glyphicon glyphicon-plus align-left"></i> Cadastro</a></li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" OnClick="carregarCrudAgencia();"><i class="glyphicon glyphicon-home align-left"></i> Agência</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="#"><span class="glyphicon glyphicon-plus align-left"><i class="fa fa-flag fa-stack-1x "></i></span> Cadastro</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /#sidebar-wrapper -->
+    </div>
+</body>
+</html>

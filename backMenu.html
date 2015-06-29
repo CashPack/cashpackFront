@@ -1,0 +1,53 @@
+<script src="operacoesMenuPrincipal.js"></script>
+<div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="index.html">Principal<span class="sr-only">(current)</span></a></li>
+            <div id="MainMenu">
+              <div class="list-group panel">
+                <a href="#menuDro1" OnClick="carregarCrudUsuario();" class="list-group-item list-group-item-default" data-toggle="collapse" data-parent="#MainMenu" >Usuário</a>
+                <div class="collapse" id="menuDro1">
+                  <a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Cadastro<i class="fa fa-caret-down"></i></a>
+                  <a href="#SubMenu2" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu2">Pesquisa<i class="fa fa-caret-down"></i></a>
+                </div>
+                <a href="#menuDro2" OnClick="carregarCrudAgencia();" class="list-group-item list-group-item-default" data-toggle="collapse" data-parent="#MainMenu" >Agência</a>
+                <div class="collapse" id="menuDro2">
+                  <a href="#SubMenu1Dro2" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Cadastro<i class="fa fa-caret-down"></i></a>
+                </div>
+              </div>
+            </div>
+
+          </ul>
+</div>
+
+
+
+<script type="text/javascript">
+        $(document).ready(function(){
+            alert("OK");
+                
+                     var bookData = {
+                         "": "",
+                         "": "",
+                         "": ""
+                     };
+                     $.ajax({
+                         type: "POST",
+                         url: "http://192.168.0.22:8080/cashpack/usuariocashpacks/cadastrarUsuarioCashPack",
+                         data: JSON.stringify(bookData),
+                         contentType: "application/json; charset=utf-8",
+                         dataType: "json",
+                         processData: true,
+                         success: function (data, status, jqXHR) {
+                             alert("success... " + data.ERROR);
+                             alert("MSG: "+ jqXHR.status);
+                             alert("MSG: "+ jqXHR.readyState);
+                             alert("MSG: "+ jqXHR.responseText);
+                         },
+                         error: function (xhr) {
+                            alert("MSG ERRO: "+ renderDetails(data));
+                             alert("MSG ERRO: " + xhr.responseText + "MSG: "+ jqXHR.readyState););
+                         }
+                     });
+                
+         });
+    </script>
