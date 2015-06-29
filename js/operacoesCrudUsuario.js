@@ -3,6 +3,7 @@ $(document).ready(function(){
 	configurarFormAtivacaoPIM(1);
     configurarAlertaDeRespostas(1, "");
 });
+
 function enviarCadastroCelular(inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular){
 	var codigoDoPaisRecebido = inputCodigoDoPais.value;
 	var codigoDeAreaRecebido = inputCodigoDeArea.value;
@@ -62,13 +63,14 @@ function validarPIM(inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular, in
                          dataType: "json",
                          processData: true,
                          success: function (data, status, jqXHR) {
-                            // alert("success... " + data.ERROR);
-                             configurarAlertaDeRespostas(data.status, data.ERROR);
+                            //alert("success... " + data.ERROR);
+                            configurarAlertaDeRespostas(data.status, data.ERROR);
                          },
                          error: function (xhr) {
                             var erro = xhr.responseText;
                             //alert("COD: "+ xhr.status + "   TIPO ERRO: " + xhr.statusText + "    MSG :" + erro);
                             configurarAlertaDeRespostas(xhr.status, xhr.status);
+                            resetarTelaUsuario();
                          }
                      });
 }
@@ -94,17 +96,16 @@ function configurarAlertaDeRespostas(data, text){
     if (data == 1) {
         $("#alertaDeRespostas").hide();
     }else{
-        $("#alertaDeRespostas").show();
+        $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
         $("#alertaDeRespostas").removeClass("alert alert-success");
         $("#alertaDeRespostas").addClass("alert alert-warning");
         $("#alertaDeRespostas").text(text);
-        $("#alertaDeRespostas").hide(6000);
     }
     if (data == 201) {
         desabilitarCamposDeCadastro();
         $("#alertaDeRespostas").removeClass("alert alert-warning");
         $("#alertaDeRespostas").addClass("alert alert-success");
-        $("#alertaDeRespostas").text("Dados cadastrados com sucesso, aguarde o recebimento do códio PIN.");
+        $("#alertaDeRespostas").text("Operação realizada com sucesso!");
         configurarFormAtivacaoPIM(2);
     }
 }
@@ -119,11 +120,21 @@ function verificarClassTela(){
         //$("#divContentPrincipalCrud").css("marginTop", "40px");
         $("#divContentPrincipalCrud").addClass("container");
         $("#divMenuLateral").css("marginTop", "50px");
-    }   
+    }  
 }
 
 function desabilitarCamposDeCadastro(){
     $("#inputCodigoDoPais").attr("disabled", true);
     $("#inputCodigoDeArea").attr("disabled", true);
     $("#inputNumeroCelular").attr("disabled", true);
+}
+
+function resetarTelaUsuario(){
+    $("#inputCodigoDoPais").attr("disabled", false);
+    $("#inputCodigoDeArea").attr("disabled", false);
+    $("#inputNumeroCelular").attr("disabled", false);
+    $("#inputCodigoDoPais").val("");
+    $("#inputCodigoDeArea").val("");
+    $("#inputNumeroCelular").val("");   
+    configurarFormAtivacaoPIM(1);
 }

@@ -7,6 +7,8 @@
     <script type="text/javascript">
         window.history.pushState('Object', 'Usuário', "usuario.html");
         //jQuery("#inputNumeroCelular").mask("99.999.999");
+
+
     </script>
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +26,7 @@
                     </div>
 
                      <div  class="form-inline">
-                        <form id="form1" data-toggle="validator" role="form">
+                        <form id="form1" data-toggle="validator" onSubmit="return validar(this);" role="form">
                             <div class="form-group">
                             <label class="col-sm-offset-1">Código do país:</label>
                             <input id="inputCodigoDoPais" type="text" class="form-control col-sm-offset-1" name="username"
@@ -50,8 +52,9 @@
                     <br>
 
                     <div id="formAtivacaoPIM" style="margin-left:25px;">
-                        <h3 class="page-header">Valídar código PIN</h3>
-                        <div class="form-inline">
+                        <h2 class="page-header">Valídar código PIN</h2>
+                        <h4>Você receberá um código PIN no número cadastro.</h4>
+                        <div class="form-inline" style="margin-top:30px;">
                             <div class="form-group">
                                 <label>Digite o código do PIN:</label>
                                 <input id="inputPIN" type="text" class="form-control" placeholder="4e70">
@@ -79,5 +82,6 @@
     <script src="js/jquery.maskedinput.min.js"></script>
     <script src="js/carregarLayout.js"></script>
     <script src="js/operacoesCrudUsuario.js"></script>
+    <script src="jquery.validate.js"></script>
 
   </body>
