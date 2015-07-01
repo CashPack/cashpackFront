@@ -1,0 +1,108 @@
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Projeto WebCash">
+    <meta name="author" content="Alex">
+    <link rel="icon" href="/favicon.ico">
+    <script type="text/javascript">
+        window.history.replaceState('Object', 'Agência', "/pages/agencia.html");
+    </script>
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <body>
+    <!--<div id="navBar"></div>-->
+    <div class="container-fluid">
+      <div class="row">
+        <div id="divMenuLateral"></div>
+        
+        <div id="divContentPrincipalCrud">
+             <h1 id="crudAgencia"  style="margin-left:25px;" class="page-header">AGÊNCIA</h1>
+
+            <div style="margin-left:25px; width:50%;">
+                <div id="alertaDeRespostas" class="alert alert-success" role="alert"></div>
+            </div>
+
+                    <div class="col-md-4" style="margin-right: 40px; background-color:#fff; height:500px; width:400px;">
+                        <form id="form1" data-toggle="validator" role="group">
+                            <div class="form-group">
+                                <label>Razão Social:</label>
+                                <input id="inputRazaoSocial" type="text" class="form-control" name="username"
+                                placeholder="Razão Social" required>
+                            </div>
+                            <div class="form-group" >
+                                <label>Nome Fantasia:</label>
+                            <input id="inputNomeFantasia" type="text" class="form-control" 
+                                placeholder="Nome Fantasia" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Cnpj:</label>
+                            <input id="inputCNPJ" type="text" class="form-control"
+                                placeholder="00.000.000/0000-00" required>
+                            </div>
+                            <div class="form-group">
+                                    <label>Ramo de atividade:</label>
+                                    <select id="selectRamo" class="form-control">
+                                    </select>
+                            </div>
+                            
+                            <div style="margin-top:25px;">
+                                <div class="form-group">
+                                    <label>Código do país:</label>
+                                    <input id="inputCodigoDoPais" type="text" class="form-control" name="username"
+                                        placeholder="00" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Código da Área:</label>
+                                <input id="inputCodigoDeArea" type="text" class="form-control"
+                                    placeholder="00" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Número do celular:</label>
+                                <input id="inputNumeroCelular" type="text" class="form-control"
+                                    placeholder="000000000" required>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:25px;">
+                                <button type="button" class="btn btn-default" onClick="enviarCadastroAgencia(inputRazaoSocial, inputNomeFantasia, inputCNPJ, selectRamo, inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular);">Cadastrar</button>
+                            </div>
+                        </form>
+                    </div> 
+                    <br>
+                    <br>
+
+                    <div id="formAtivacaoPIM" style="margin-left:50px;">
+                        <h2>Valídar código PIN</h2>
+                        <h4>Você receberá um código PIN no número cadastro.</h4>
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label>Digite o código do PIN:</label>
+                                <input id="inputPIN" type="text" class="form-control" placeholder="4e70">
+                            </div>
+                            <button type="submit" class="btn btn-default" OnClick="validarPIM(inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular, inputPIN);"
+                            >Validar PIN</button>
+                        </div>
+                    </div>
+        </div>
+        <div id="divFooter"></div>
+       </div>
+    </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="/js/holder.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/carregarLayout.js"></script>
+    <script src="/js/operacoesCrudAgencia.js"></script>
+
+
+  </body>

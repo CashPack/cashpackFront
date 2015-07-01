@@ -3,15 +3,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Projeto WebCash">
     <meta name="author" content="Alex">
-    <link rel="icon" href="favicon.ico">
+    <link rel="icon" href="/favicon.ico">
+    <title>CashPack - Usuários</title>
     <script type="text/javascript">
-        window.history.pushState('Object', 'Usuário', "usuario.html");
-        //jQuery("#inputNumeroCelular").mask("99.999.999");
-
-
+        window.history.replaceState('Object', 'Usuário', "/pages/usuario.html");
     </script>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
   
     <body>
         <div class="container-fluid">
@@ -24,43 +22,31 @@
                     <div style="margin-left:25px; width:50%;">
                         <div id="alertaDeRespostas" class="alert alert-success" role="alert"></div>
                     </div>
-
-                     <div  class="form-inline">
+                    <div class="col-md-4" style="width:300px;">
                         <form id="form1" data-toggle="validator" onSubmit="return validar(this);" role="form">
                             <div class="form-group">
-                            <label class="col-sm-offset-1">Código do país:</label>
-                            <input id="inputCodigoDoPais" type="text" class="form-control col-sm-offset-1" name="username"
-                                placeholder="00" required>
+                                <label>Número do celular:</label>
+                            <input id="inputNumeroCelular" type="text" class="form-control" placeholder="(00)'0'0000-0000"
+                                required>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-offset-1">Código da Área:</label>
-                            <input id="inputCodigoDeArea" type="text" class="form-control col-sm-offset-1"
-                                placeholder="00" required>
+                            <div style="margin-top:25px;">
+                                <button type="button" class="btn btn-default" onClick="enviarCadastroCelular(inputNumeroCelular);">Cadastrar</button>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-offset-1">Número do celular:</label>
-                            <input id="inputNumeroCelular" type="text" class="form-control col-sm-offset-1"
-                                placeholder="000000000" required>
-                            </div>
-
-                             <div style="margin-left:25px; margin-top:25px;">
-                            <button type="button" class="btn btn-default" onClick="enviarCadastroCelular(inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular);">Cadastrar</button>
-                    </div>
                         </form>
                     </div>
                     <br>
                     <br>
-
                     <div id="formAtivacaoPIM" style="margin-left:25px;">
                         <h2 class="page-header">Valídar código PIN</h2>
                         <h4>Você receberá um código PIN no número cadastro.</h4>
                         <div class="form-inline" style="margin-top:30px;">
                             <div class="form-group">
                                 <label>Digite o código do PIN:</label>
-                                <input id="inputPIN" type="text" class="form-control" placeholder="4e70">
+                                <input id="inputPIN" type="text" class="form-control">
+
                             </div>
                             <button type="submit" class="btn btn-default" OnClick="validarPIM(inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular, inputPIN);"
-                            >Validar PIM</button>
+                            >Validar PIN</button>
                         </div>
                     </div>
                 </div>
@@ -72,16 +58,18 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="js/holder.js"></script>
+    <script src="/js/holder.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery.maskedinput.min.js"></script>
-    <script src="js/carregarLayout.js"></script>
-    <script src="js/operacoesCrudUsuario.js"></script>
-    <script src="jquery.validate.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.maskedinput.min.js"></script>
+    <script src="/js/carregarLayout.js"></script>
+    <script src="/js/operacoesCrudUsuario.js"></script>
+    <script src="/js/jquery.maskedinput-1.3.1.min.js"></script>
+    <script src="/jquery.validate.js"></script>
+
 
   </body>

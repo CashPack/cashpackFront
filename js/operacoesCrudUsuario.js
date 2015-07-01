@@ -2,13 +2,25 @@ $(document).ready(function(){
     verificarClassTela();
 	configurarFormAtivacaoPIM(1);
     configurarAlertaDeRespostas(1, "");
+
+    //$("#inputNumeroCelular").mask("(99)9999-9999");
+    $("#inputNumeroCelular").focus(function () { 
+        $(this).mask("(99) 9999-9999?9"); 
+    }); 
+    $("#inputNumeroCelular").focusout(function () {
+        var phone, element; element = $(this); element.unmask(); 
+        phone = element.val().replace(/\D/g, ''); if (phone.length > 10) { 
+            element.mask("(99) 99999-999?9"); 
+        } else { 
+            element.mask("(99) 9999-9999?9"); 
+        } 
+        });
+
 });
 
-function enviarCadastroCelular(inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular){
-	var codigoDoPaisRecebido = inputCodigoDoPais.value;
-	var codigoDeAreaRecebido = inputCodigoDeArea.value;
+function enviarCadastroCelular(inputNumeroCelular){
 	var numeroUsuarioRecebido = inputNumeroCelular.value;
-    validarAtributosObrigatorios(codigoDoPaisRecebido, codigoDeAreaRecebido, numeroUsuarioRecebido);
+    //validarAtributosObrigatorios(codigoDoPaisRecebido, codigoDeAreaRecebido, numeroUsuarioRecebido);
 	//alert("codigoDoPais: "+ codigoDoPaisRecebido + "   codigoDeArea: "+ codigoDeAreaRecebido +"   numeroUsuarioRecebido: "+ numeroUsuarioRecebido);
 
 	var bookData = {  
@@ -63,12 +75,12 @@ function validarPIM(inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular, in
                          dataType: "json",
                          processData: true,
                          success: function (data, status, jqXHR) {
-                            //alert("success... " + data.ERROR);
+                         //   alert("success... " + data.ERROR);
                             configurarAlertaDeRespostas(data.status, data.ERROR);
                          },
                          error: function (xhr) {
                             var erro = xhr.responseText;
-                            //alert("COD: "+ xhr.status + "   TIPO ERRO: " + xhr.statusText + "    MSG :" + erro);
+                         //   alert("COD: "+ xhr.status + "   TIPO ERRO: " + xhr.statusText + "    MSG :" + erro);
                             configurarAlertaDeRespostas(xhr.status, xhr.status);
                             resetarTelaUsuario();
                          }
@@ -92,8 +104,11 @@ function configurarAlertaDeRespostas(data, text){
         $("#alertaDeRespostas").removeClass("alert alert-success");
         $("#alertaDeRespostas").addClass("alert alert-danger");
         $("#alertaDeRespostas").text("Não foi possível se comunicar com o servidor.");
+        $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
+        return;
     }
     if (data == 1) {
+
         $("#alertaDeRespostas").hide();
     }else{
         $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);

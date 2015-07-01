@@ -1,7 +1,7 @@
 
 function carregarCrudUsuario(){
 	//alert("OK  - USUARIO");
-
+	//window.history.pushState('Object', 'Usuário', "pages");
 	var valorCrud = "divContentPrincipalCrud";
 	//alert(valorCrud);
 	if (document.getElementById(valorCrud) != null) {
@@ -15,10 +15,10 @@ function carregarCrudUsuario(){
 		//alert("DIV PRINCIPAL NOT VAZIA - USUARIO");
 		if (document.getElementById("crudUsuario") == null) {
 			//alert("VAI CARREGAR USUARIO");
-			$("#divContentPrincipal").load("usuario.html");
+			$("#divContentPrincipal").load("/pages/usuario.html");
 		}
 	}else{
-		$("#divContentPrincipal").load("usuario.html");
+		$("#divContentPrincipal").load("/pages/usuario.html");
 	}
 
 }
@@ -38,9 +38,9 @@ function carregarCrudAgencia(){
 		//alert("DIV PRINCIPAL NOT VAZIA - AGENCIA");
 		if (document.getElementById("crudAgencia") == null) {
 			//alert("VAI CARREGAR AGENCIA");
-			$("#divContentPrincipal").load("agencia.html");
+			$("#divContentPrincipal").load("/pages/agencia.html");
 		}
 	}else{
-		$("#divContentPrincipal").load("agencia.html");
+		$("#divContentPrincipal").load("/pages/agencia.html");
 	}
  }
