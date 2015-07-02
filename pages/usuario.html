@@ -10,6 +10,8 @@
     </script>
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+     <script type="text/javascript" src="md5.js"></script>
+    <script type="text/javascript" src="jcap.js"></script>
   
     <body>
         <div class="container-fluid">
@@ -23,20 +25,25 @@
                         <div id="alertaDeRespostas" class="alert alert-success" role="alert"></div>
                     </div>
                     <div class="col-md-4" style="width:300px;">
-                        <form id="form1" data-toggle="validator" onSubmit="return validar(this);" role="form">
+                        <div id="divFormCaptcha">
+                        <form method="get" onSubmit="return jcap();">
                             <div class="form-group">
                                 <label>Número do celular:</label>
-                            <input id="inputNumeroCelular" type="text" class="form-control" placeholder="(00)'0'0000-0000"
-                                required>
+                                <input id="inputNumeroCelular" type="text" class="form-control" placeholder="(00)'0'0000-0000"
+                                    required>
                             </div>
-                            <div style="margin-top:25px;">
-                                <button type="button" class="btn btn-default" onClick="enviarCadastroCelular(inputNumeroCelular);">Cadastrar</button>
-                            </div>
+                            <label>Digite o que você ver na imagem abaixo:</label>
+                                
+                            <script type="text/javascript">sjcap();</script>
+                            <p><input class='form-control' type="text" id="jfldid" name="jfldid" class="jfldcls" size="jfldsz" required></p>
+                            <p id="coloca"></p>
+                            <p><input type="button" class="btn btn-success" id="submit" name="submit" value="Cadastrar" OnClick="validarAtributosObrigatorios();"></p>
                         </form>
+                        </div>
                     </div>
                     <br>
                     <br>
-                    <div id="formAtivacaoPIM" style="margin-left:25px;">
+                    <div id="formAtivacaoPIM" class="col-md-4" style="background-color:#ccc; height: 240px; width:500px; margin-left:140px;">
                         <h2 class="page-header">Valídar código PIN</h2>
                         <h4>Você receberá um código PIN no número cadastro.</h4>
                         <div class="form-inline" style="margin-top:30px;">
@@ -70,6 +77,7 @@
     <script src="/js/operacoesCrudUsuario.js"></script>
     <script src="/js/jquery.maskedinput-1.3.1.min.js"></script>
     <script src="/jquery.validate.js"></script>
+  
 
 
   </body>

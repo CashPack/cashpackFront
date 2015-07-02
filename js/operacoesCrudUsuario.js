@@ -2,6 +2,8 @@ $(document).ready(function(){
     verificarClassTela();
 	configurarFormAtivacaoPIM(1);
     configurarAlertaDeRespostas(1, "");
+    carregarCaptcha();
+    //$("#formCaptcha").hide();
 
     //$("#inputNumeroCelular").mask("(99)9999-9999");
     $("#inputNumeroCelular").focus(function () { 
@@ -18,14 +20,20 @@ $(document).ready(function(){
 
 });
 
-function enviarCadastroCelular(inputNumeroCelular){
+function carregarCaptcha(){
+    document.getElementById('coloca').innerHTML = "<img src=\"" + decodeURIComponent(imgdir) + imgid + ".jpg\" width=\"270\" height=\"80\" alt=\"\">";
+    //documento.getElementById('inputCa').innerHTML =  document.write("<p><input class='form-control' type=\"text\" id=\"" + jfldid + "\" name=\"" + jfldid + "\" class=\"" + jfldcls + "\" size=\"" +  jfldsz + "\"><\/p>"
+}
+
+function enviarCadastroCelular(inputNumeroCelular){   
+//    validarAtributosObrigatorios();
 	var numeroUsuarioRecebido = inputNumeroCelular.value;
-    //validarAtributosObrigatorios(codigoDoPaisRecebido, codigoDeAreaRecebido, numeroUsuarioRecebido);
+    
 	//alert("codigoDoPais: "+ codigoDoPaisRecebido + "   codigoDeArea: "+ codigoDeAreaRecebido +"   numeroUsuarioRecebido: "+ numeroUsuarioRecebido);
 
 	var bookData = {  
-                        "codPais":codigoDoPaisRecebido,
-                        "codArea":codigoDeAreaRecebido,        
+                        "codPais":"",
+                        "codArea":"",        
                         "numeroTelefone":numeroUsuarioRecebido
                     };
                      $.ajax({
@@ -48,8 +56,9 @@ function enviarCadastroCelular(inputNumeroCelular){
 
                          }
                      });
+    
+
 	//alert("Dados Enviados, você receberá um código PIM em seu aparelho.");
-    return false;
 }
 
 function validarPIM(inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular, inputPIN){
@@ -101,10 +110,11 @@ function configurarAlertaDeRespostas(data, text){
     //alert("MSG: "+data);
     if (data == 0) {
         //alert("IF - 0");
-        $("#alertaDeRespostas").removeClass("alert alert-success");
+        //$("#alertaDeRespostas").removeClass("alert alert-success");
         $("#alertaDeRespostas").addClass("alert alert-danger");
-        $("#alertaDeRespostas").text("Não foi possível se comunicar com o servidor.");
+        $("#alertaDeRespostas").text("Ops! Não foi possível se comunicar com o servidor.");
         $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
+        configurarFormAtivacaoPIM(1);
         return;
     }
     if (data == 1) {
@@ -120,12 +130,22 @@ function configurarAlertaDeRespostas(data, text){
         desabilitarCamposDeCadastro();
         $("#alertaDeRespostas").removeClass("alert alert-warning");
         $("#alertaDeRespostas").addClass("alert alert-success");
-        $("#alertaDeRespostas").text("Operação realizada com sucesso!");
+        $("#alertaDeRespostas").text("Pré-cadastro realizado com sucesso!");
         configurarFormAtivacaoPIM(2);
     }
 }
 
-function validarAtributosObrigatorios(codigoDoPaisRecebido, codigoDeAreaRecebido, numeroUsuarioRecebido){
+function validarAtributosObrigatorios(){
+    //alert("METODO: validarAtributosObrigatorios"+ );
+    var numero = document.getElementById('inputNumeroCelular').value;
+    if (numero == "") {
+        $("#alertaDeRespostas").addClass("alert alert-warning");
+        $("#alertaDeRespostas").text("O número do celular é um campo obrigatório.");
+        $("#inputNumeroCelular").focus();
+        $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
+        return;
+    }
+    jcap();
 }
 
 function verificarClassTela(){
