@@ -17,7 +17,6 @@ $(document).ready(function(){
             element.mask("(99) 9999-9999?9"); 
         } 
         });
-
 });
 
 function carregarCaptcha(){
@@ -26,14 +25,13 @@ function carregarCaptcha(){
 }
 
 function enviarCadastroCelular(inputNumeroCelular){   
-//    validarAtributosObrigatorios();
+    //validarAtributosObrigatorios();
 	var numeroUsuarioRecebido = inputNumeroCelular.value;
     
 	//alert("codigoDoPais: "+ codigoDoPaisRecebido + "   codigoDeArea: "+ codigoDeAreaRecebido +"   numeroUsuarioRecebido: "+ numeroUsuarioRecebido);
 
 	var bookData = {  
-                        "codPais":"",
-                        "codArea":"",        
+                        "codPais":"55",
                         "numeroTelefone":numeroUsuarioRecebido
                     };
                      $.ajax({
@@ -61,9 +59,7 @@ function enviarCadastroCelular(inputNumeroCelular){
 	//alert("Dados Enviados, você receberá um código PIM em seu aparelho.");
 }
 
-function validarPIM(inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular, inputPIN){
-	var codigoDoPaisRecebido = inputCodigoDoPais.value;
-	var codigoDeAreaRecebido = inputCodigoDeArea.value;
+function validarPIM(inputNumeroCelular, inputPIN){
 	var numeroUsuarioRecebido = inputNumeroCelular.value;
 	var numeroPimRecebido = inputPIN.value;
 
@@ -71,8 +67,7 @@ function validarPIM(inputCodigoDoPais, inputCodigoDeArea, inputNumeroCelular, in
 	//	+ "PIM: "+numeroPimRecebido);
 
 	var bookData = {  
-                        "codPais":codigoDoPaisRecebido,
-                        "codArea":codigoDeAreaRecebido,        
+                        "codPais":"55",
                         "numeroTelefone":numeroUsuarioRecebido,
                         "confirmacaoDoPin":numeroPimRecebido
                     };
