@@ -1,8 +1,29 @@
 $(document).ready(function(){
+    resete();
+    verificarClassTela();
+    configurarFormAtivacaoPIM(1);
+    configurarAlertaDeRespostas(1, "");
+
     $("#labelCpf").hide();
     $("#inputNumeroDocumentoCpf").hide();
     $("#labelNome").hide();
     $("#inputNome").hide();
+
+    $("#inputNumeroDocumentoCnpj").focus(function () { 
+        $(this).mask("99.999.999/9999-99"); 
+    }); 
+
+    $("#inputNumeroCelular").focus(function () { 
+        $(this).mask("(99) 9999-9999?9"); 
+    }); 
+    $("#inputNumeroCelular").focusout(function () {
+        var phone, element; element = $(this); element.unmask(); 
+        phone = element.val().replace(/\D/g, ''); if (phone.length > 10) { 
+            element.mask("(99) 99999-999?9"); 
+        } else { 
+            element.mask("(99) 9999-9999?9"); 
+        } 
+        });
     //get a reference to the select element
     $select = $('#selectRamo');
     $.ajax({
@@ -20,26 +41,14 @@ $(document).ready(function(){
         $select.html('<option id="-1">Nenhum registro encontrado!</option>');
     }
     });
-    $("#inputNumeroDocumentoCnpj").focus(function () { 
-        $(this).mask("99.999.999/9999-99"); 
-    }); 
+    
 
-    $("#inputNumeroCelular").focus(function () { 
-        $(this).mask("(99) 9999-9999?9"); 
-    }); 
-    $("#inputNumeroCelular").focusout(function () {
-        var phone, element; element = $(this); element.unmask(); 
-        phone = element.val().replace(/\D/g, ''); if (phone.length > 10) { 
-            element.mask("(99) 99999-999?9"); 
-        } else { 
-            element.mask("(99) 9999-9999?9"); 
-        } 
-        });
 
-	verificarClassTela();
-	configurarFormAtivacaoPIM(1);
-	configurarAlertaDeRespostas(1, "");
 });
+
+function resete(){
+    //window.location.reload(true);
+}
 
 function verificarTipo(){
     //alert("ok");
@@ -139,7 +148,7 @@ function enviarCadastroAgencia(inputNome, inputRazaoSocial, inputNomeFantasia,in
                          error: function (xhr) {
                             var erro = xhr.responseText;
                             //alert("RETORNO: error COD: "+ xhr.status + " MSG :" + erro);
-                            configurarAlertaDeRespostas(xhr.status, xhr.status);
+                            configurarAlertaDeRespostas(xhr.status, "Pré-cadastro realizado com sucesso!");
                             
 
                          }
@@ -214,7 +223,7 @@ function validarPIM(inputNome, inputRazaoSocial, inputNomeFantasia, inputNumeroD
                          error: function (xhr) {
                             var erro = xhr.responseText;
                             //alert("COD: "+ xhr.status + "   TIPO ERRO: " + xhr.statusText + "    MSG :" + erro);
-                            configurarAlertaDeRespostas(xhr.status, xhr.status);
+                            configurarAlertaDeRespostas(xhr.status,  "Agência cadastrada com suscesso!");
                             resetarTelaAgencia();
                          }
                      });
@@ -262,7 +271,7 @@ function configurarAlertaDeRespostas(data, text){
 
         }
         //alert("NADA");
-        $("#alertaDeRespostas").text("Operação realizada com sucesso!");
+        $("#alertaDeRespostas").text(text);
         $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000); 
         configurarFormAtivacaoPIM(2);
     }

@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     verificarClassTela();
 	configurarFormAtivacaoPIM(1);
@@ -85,7 +86,7 @@ function validarPIM(inputNumeroCelular, inputPIN){
                          error: function (xhr) {
                             var erro = xhr.responseText;
                          //   alert("COD: "+ xhr.status + "   TIPO ERRO: " + xhr.statusText + "    MSG :" + erro);
-                            configurarAlertaDeRespostas(xhr.status, "Cadastro realizado com suscesso!");
+                            configurarAlertaDeRespostas(xhr.status, "Usuário cadastrado com suscesso!");
                             resetarTelaUsuario();
                          }
                      });
@@ -170,8 +171,8 @@ function resetarTelaUsuario(){
     $("#inputNumeroCelular").val("");   
     $("#jfldid").val("");
     //document.getElementById('coloca').innerHTML=""; 
-    //configurarFormAtivacaoPIM(1);
+    configurarFormAtivacaoPIM(1);
     //carregarCaptcha();
     //$("#divFormCaptcha").location.reload();
-    window.location.reload(true);
+    //window.location.reload(true);
 }
