@@ -1,7 +1,5 @@
 $(document).ready(function(){
     $("#labelCpf").hide();
-    $("#inputCpf").hide();
-    $("#inputNome").hide();
     $("#labelNome").hide();
     
     //get a reference to the select element
@@ -21,12 +19,10 @@ $(document).ready(function(){
         $select.html('<option id="-1">Nenhum registro encontrado!</option>');
     }
     });
-    $("#inputCNPJ").focus(function () { 
+    $("#inputNumeroDocumento").focus(function () { 
         $(this).mask("99.999.999/9999-99"); 
     }); 
-    $("#inputCpf").focus(function () { 
-        $(this).mask("999.999.999-99"); 
-    }); 
+
     $("#inputNumeroCelular").focus(function () { 
         $(this).mask("(99) 9999-9999?9"); 
     }); 
@@ -48,26 +44,28 @@ function verificarTipo(){
     //alert("ok");
     if ($('#tipoDeAgencia option:selected').text() == "Pessoa Física") {
         $("#labelCnpj").hide();
-        $("#inputCNPJ").hide();
-        $("#inputRazaoSocial").hide();
         $("#labelRazaoSocial").hide();
         $("#labelCpf").show();
         $("#inputCpf").show();
-        $("#inputNome").show();
         $("#labelNome").show();
+        $("#inputNumeroDocumento").focus(function () { 
+            $("#inputNumeroDocumento").val("");
+            $(this).mask("999.999.999-99"); 
+        }); 
     }if ($('#tipoDeAgencia option:selected').text() == "Pessoa Jurídica") {
-        $("#inputNome").hide();
+        
         $("#labelNome").hide();
         $("#labelCpf").hide();
-        $("#inputCpf").hide();
         $("#labelCnpj").show();
-        $("#inputCNPJ").show();
         $("#inputRazaoSocial").show();
         $("#labelRazaoSocial").show();
-
+        $("#inputNumeroDocumento").focus(function () { 
+            $("#inputNumeroDocumento").val("");
+            $(this).mask("99.999.999/9999-99"); 
+        }); 
     }
 }
-function enviarCadastroAgencia(inputRazaoSocial, inputNomeFantasia, inputCNPJ, selectRamo,inputEmail, inputNumeroCelular){
+function enviarCadastroAgencia(inputRazaoSocial, inputNomeFantasia, inputNumeroDocumento, selectRamo,inputEmail, inputNumeroCelular){
     //alert();
     if (validarAtributosObrigatorios() == false) {
         return false;
@@ -76,7 +74,19 @@ function enviarCadastroAgencia(inputRazaoSocial, inputNomeFantasia, inputCNPJ, s
     var razaoSocial = inputRazaoSocial.value;
     var nomeFantasia = inputNomeFantasia.value;
     var email = inputEmail.value;
-    var numeroCnpj = inputCNPJ.value;
+    var numeroDocumento = inputNumeroDocumento.value;
+    var numeroDocumentoReplace = numeroDocumento.replace("/","").replace("-","").replace(".","").replace(".","").replace(".","");
+    var numeroCelular = inputNumeroCelular.value;
+    //alert("DIGITOS:"+numeroDocumentoReplace+"-");
+    var tipoDeDocumento;
+    if (numeroDocumentoReplace.length == 11) {
+        tipoDeDocumento = "CPF";
+    }else if (numeroDocumentoReplace.length == 14){
+        tipoDeDocumento = "CNPJ";
+    }else{
+        //alert("BUGOU");
+    }
+
     var idRamoDeAtividade = $('#selectRamo option:selected').attr("id");
     var ramoDeAtividade = $('#selectRamo option:selected').text();
     var versionRamoDeAtividade = $('#selectRamo option:selected').attr("version");
@@ -84,23 +94,21 @@ function enviarCadastroAgencia(inputRazaoSocial, inputNomeFantasia, inputCNPJ, s
     
 
     var bookData = {  
-            "nomeFantasia":"nomva dfanasda",
-            "razaoSocial":"NOMEasdasd",
-            "numeroDocumento":"12312312312312",
-            "tipoDeDocumentoAgenciaEnum":"CNPJ",
-            "statusAgencia":"ATIVADO",
-            "email":"EMAIL@EMAIL",
+        "nomeFantasia":nomeFantasia,
+        "razaoSocial":razaoSocial,
+        "email":email,
+        "numeroDocumento":numeroDocumentoReplace,
+        "tipoDeDocumentoAgenciaEnum":tipoDeDocumento,
             "ramoDeAtividade":{  
-                "nome":"LANCHE",
-                "id":1
+                "nome":ramoDeAtividade,
+                "id":idRamoDeAtividade,
+                "version":versionRamoDeAtividade
             },
             "telefone":{  
                 "codPais":"55",
-                "numero":"(83) 98833 - 4154"
+                "numero":numeroCelular
             }
-};
-
-
+    };
                      $.ajax({
                          type: "POST",
                          url: "http://localhost:8080/cashpack/agencia/cadastrarAgencia",
@@ -125,30 +133,52 @@ function enviarCadastroAgencia(inputRazaoSocial, inputNomeFantasia, inputCNPJ, s
     }
 }
 
-function validarPIM(inputNumeroCelular, inputPIN){
+function validarPIM(inputRazaoSocial, inputNomeFantasia, inputNumeroDocumento, selectRamo,inputEmail, inputNumeroCelular, inputPIN){
     
+    var razaoSocial = inputRazaoSocial.value;
+    var nomeFantasia = inputNomeFantasia.value;
+    var email = inputEmail.value;
+    var numeroDocumento = inputNumeroDocumento.value;
+    var numeroDocumentoReplace = numeroDocumento.replace("/","").replace("-","").replace(".","").replace(".","").replace(".","");
+    var numeroCelular = inputNumeroCelular.value;
+    //alert("DIGITOS:"+numeroDocumentoReplace+"-");
+    var tipoDeDocumento;
+    if (numeroDocumentoReplace.length == 11) {
+        tipoDeDocumento = "CPF";
+    }else if (numeroDocumentoReplace.length == 14){
+        tipoDeDocumento = "CNPJ";
+    }else{
+        //alert("BUGOU");
+    }
+
+    var idRamoDeAtividade = $('#selectRamo option:selected').attr("id");
+    var ramoDeAtividade = $('#selectRamo option:selected').text();
+    var versionRamoDeAtividade = $('#selectRamo option:selected').attr("version");
     var numeroUsuarioRecebido = inputNumeroCelular.value;
     var numeroPimRecebido = inputPIN.value;
 
     //alert("codigoDoPais: "+ codigoDoPaisRecebido + "   codigoDeArea: "+ codigoDeAreaRecebido +"   numeroUsuarioRecebido: "+ numeroUsuarioRecebido
     //  + "PIM: "+numeroPimRecebido);
 
-    var bookData = {  
-            "nomeFantasia":"nomva dfanasda",
-            "razaoSocial":"NOMEasdasd",
-            "numeroDocumento":"12312312312312",
-            "tipoDeDocumentoAgenciaEnum":"CNPJ",
-            "statusAgencia":"ATIVADO",
-            "email":"EMAIL@EMAIL",
+     var bookData = {  
+        "nomeFantasia":nomeFantasia,
+        "razaoSocial":razaoSocial,
+        "email":email,
+        "numeroDocumento":numeroDocumentoReplace,
+        "tipoDeDocumentoAgenciaEnum":tipoDeDocumento,
             "ramoDeAtividade":{  
-                "nome":"LANCHE",
-                "id":1
+                "nome":ramoDeAtividade,
+                "id":idRamoDeAtividade,
+                "version":versionRamoDeAtividade
             },
             "telefone":{  
                 "codPais":"55",
-                "numero":"(83) 98833 - 4154"
+                "numero":numeroCelular,
+            },
+            "codigoPin":{  
+                "codigo":numeroPimRecebido
             }
-};
+        };
                      $.ajax({
                          type: "POST",
                          url: "http://localhost:8080/cashpack/agencia/confirmarPinAgencia",
@@ -229,10 +259,11 @@ function configurarAlertaDeRespostas(data, text){
 }
 
 function desabilitarCamposDeCadastro(){
+    $("#inputNumeroDocumento").attr("disabled", true);
     $("#tipoDeAgencia").attr("disabled", true);
     $("#inputRazaoSocial").attr("disabled", true);
     $("#inputNomeFantasia").attr("disabled", true);
-    $("#inputCNPJ").attr("disabled", true);
+    $("#inputNumeroCelular").attr("disabled", true);
     $("#selectRamo").attr("disabled", true);
     $("#inputCodigoDoPais").attr("disabled", true);
     $("#inputCodigoDeArea").attr("disabled", true);
@@ -260,25 +291,13 @@ function resetarTelaAgencia(){
 
 function validarAtributosObrigatorios(){
     //alert("METODO: validarAtributosObrigatorios"+ );
-    if ($('#tipoDeAgencia option:selected').text() == "Pessoa Física") {
-        var nome = document.getElementById('inputNome').value;
-        if (nome == "") {
-            $("#alertaDeRespostas").addClass("alert alert-warning");
-            $("#alertaDeRespostas").text("O nome é um campo obrigatório.");
-            $("#inputNome").focus();
-            $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
-            return false;
-        }
-    }
-    if ($('#tipoDeAgencia option:selected').text() == "Pessoa Jurídica") {
-        var razaoSocialInput = document.getElementById('inputRazaoSocial').value;
-        if (razaoSocialInput == "") {
-            $("#alertaDeRespostas").addClass("alert alert-warning");
-            $("#alertaDeRespostas").text("A Razao Social é um campo obrigatório.");
-            $("#inputRazaoSocial").focus();
-            $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
-            return false;
-        }
+    var razaoSocialInput = document.getElementById('inputRazaoSocial').value;
+    if (razaoSocialInput == "") {
+        $("#alertaDeRespostas").addClass("alert alert-warning");
+        $("#alertaDeRespostas").text("A Razao Social é um campo obrigatório.");
+        $("#inputRazaoSocial").focus();
+        $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
+        return false;
     }
     
     var nomeFantasiaInput = document.getElementById('inputNomeFantasia').value;
@@ -289,11 +308,11 @@ function validarAtributosObrigatorios(){
         $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
         return false;
     }
-    var cnpjInput = document.getElementById('inputCNPJ').value;
-    if (cnpjInput == "") {
+    var numeroDocumentoInput = document.getElementById('inputNumeroDocumento').value;
+    if (numeroDocumentoInput == "") {
         $("#alertaDeRespostas").addClass("alert alert-warning");
-        $("#alertaDeRespostas").text("O Cnpj é um campo obrigatório.");
-        $("#inputCNPJ").focus();
+        $("#alertaDeRespostas").text("O número do documento é um campo obrigatório.");
+        $("#inputNumeroDocumento").focus();
         $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
         return false;
     }

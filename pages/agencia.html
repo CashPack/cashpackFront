@@ -35,11 +35,9 @@
                             </div>
                             <div class="form-group">
                                 <label id="labelRazaoSocial">Razão Social:</label>
-                                <input id="inputRazaoSocial" type="text" class="form-control" name="username"
-                                placeholder="Razão Social" required>
                                 <label id="labelNome">Nome:</label>
-                                <input id="inputNome" type="text" class="form-control" name="username"
-                                placeholder="Nome" required>
+                                <input id="inputRazaoSocial" type="text" class="form-control" name="username"
+                                placeholder="Razão Social/Nome" required>
                             </div>
                             <div class="form-group" >
                                 <label>Nome Fantasia:</label>
@@ -48,12 +46,9 @@
                             </div>
                             <div class="form-group">
                                 <label id="labelCnpj">Cnpj:</label>
-                                <input id="inputCNPJ" type="text" class="form-control"
-                                placeholder="00.000.000/0000-00" required>
-                                
                                 <label id="labelCpf">Cpf:</label>
-                                <input id="inputCpf" type="text" class="form-control"
-                                placeholder="000.000.000-00" required>
+                                <input id="inputNumeroDocumento" type="text" class="form-control"
+                                placeholder="00.000.000/0000-00 / 000.000.000-00" required>
                             </div>
                             <div class="form-group">
                                     <label>Ramo de atividade:</label>
@@ -72,7 +67,7 @@
                                     <input id="inputNumeroCelular" type="text" class="form-control" placeholder="(00)'0'0000-0000"
                                         required>
                                 </div>
-                                <button type="button" class="btn btn-success" onClick="enviarCadastroAgencia(inputRazaoSocial, inputNomeFantasia, inputCNPJ, selectRamo, inputEmail, inputNumeroCelular);">Enviar cadastro</button>
+                                <button type="button" class="btn btn-success" onClick="enviarCadastroAgencia(inputRazaoSocial, inputNomeFantasia, inputNumeroDocumento, selectRamo, inputEmail, inputNumeroCelular);">Enviar cadastro</button>
                             </div>
                         </form>
                     </div> 
@@ -87,7 +82,7 @@
                                 <label>Digite o código do PIN:</label>
                                 <input id="inputPIN" type="text" class="form-control" placeholder="4e70">
                             </div>
-                            <button type="submit" class="btn btn-default" OnClick="validarPIM(inputNumeroCelular, inputPIN);"
+                            <button type="submit" class="btn btn-default" OnClick="validarPIM(inputRazaoSocial, inputNomeFantasia, inputNumeroDocumento, selectRamo,inputEmail, inputNumeroCelular, inputPIN);"
                             >Validar PIN</button>
                         </div>
                     </div>
