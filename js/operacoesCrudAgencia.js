@@ -189,6 +189,7 @@ function validarPIM(inputRazaoSocial, inputNomeFantasia, inputNumeroDocumento, s
                          success: function (data, status, jqXHR) {
                            // alert("success... " + data.ERROR);
                             configurarAlertaDeRespostas(data.status, data.ERROR);
+                            resetarTelaAgencia();
                          },
                          error: function (xhr) {
                             var erro = xhr.responseText;
@@ -265,26 +266,26 @@ function desabilitarCamposDeCadastro(){
     $("#inputNomeFantasia").attr("disabled", true);
     $("#inputNumeroCelular").attr("disabled", true);
     $("#selectRamo").attr("disabled", true);
-    $("#inputCodigoDoPais").attr("disabled", true);
-    $("#inputCodigoDeArea").attr("disabled", true);
     $("#inputNumeroCelular").attr("disabled", true);
     $("#inputEmail").attr("disabled", true);
 }
 
 function resetarTelaAgencia(){
     $("#inputRazaoSocial").attr("disabled", false);
+    $("#tipoDeAgencia").attr("disabled", false);
     $("#inputNomeFantasia").attr("disabled", false);
-    $("#inputCNPJ").attr("disabled", false);
+    $("#inputEmail").attr("disabled", false);
     $("#selectRamo").attr("disabled", false);
     $("#inputCodigoDoPais").attr("disabled", false);
     $("#inputCodigoDeArea").attr("disabled", false);
     $("#inputNumeroCelular").attr("disabled", false);
+    $("#inputNumeroDocumento").attr("disabled", false);
     $("#inputRazaoSocial").val("");
+    $("#inputEmail").val("");
     $("#inputNomeFantasia").val("");
-    $("#inputCNPJ").val("");
+    $("#inputNumeroDocumento").val("");
+    $("#tipoDeAgencia").prop("selectIndex",0);
     $("#selectRamo").prop("selectIndex",0);
-    $("#inputCodigoDoPais").val("");
-    $("#inputCodigoDeArea").val("");
     $("#inputNumeroCelular").val("");   
     configurarFormAtivacaoPIM(1);
 }
@@ -334,3 +335,4 @@ function validarAtributosObrigatorios(){
     }
     return true;
 }
+

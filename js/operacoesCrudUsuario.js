@@ -49,7 +49,7 @@ function enviarCadastroCelular(inputNumeroCelular){
                          error: function (xhr) {
                             var erro = xhr.responseText;
                             //alert("COD: "+ xhr.status + " MSG :" + erro);
-                            configurarAlertaDeRespostas(xhr.status, xhr.status);
+                            configurarAlertaDeRespostas(xhr.status, "Pré-cadastro realizado com sucesso!");
                             
 
                          }
@@ -85,7 +85,7 @@ function validarPIM(inputNumeroCelular, inputPIN){
                          error: function (xhr) {
                             var erro = xhr.responseText;
                          //   alert("COD: "+ xhr.status + "   TIPO ERRO: " + xhr.statusText + "    MSG :" + erro);
-                            configurarAlertaDeRespostas(xhr.status, xhr.status);
+                            configurarAlertaDeRespostas(xhr.status, "Cadastro realizado com suscesso!");
                             resetarTelaUsuario();
                          }
                      });
@@ -125,7 +125,7 @@ function configurarAlertaDeRespostas(data, text){
         desabilitarCamposDeCadastro();
         $("#alertaDeRespostas").removeClass("alert alert-warning");
         $("#alertaDeRespostas").addClass("alert alert-success");
-        $("#alertaDeRespostas").text("Pré-cadastro realizado com sucesso!");
+        $("#alertaDeRespostas").text(text);
         configurarFormAtivacaoPIM(2);
     }
 }
@@ -167,4 +167,5 @@ function resetarTelaUsuario(){
     $("#inputCodigoDeArea").val("");
     $("#inputNumeroCelular").val("");   
     configurarFormAtivacaoPIM(1);
+    carregarCaptcha();
 }
