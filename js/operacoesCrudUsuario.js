@@ -157,15 +157,21 @@ function desabilitarCamposDeCadastro(){
     $("#inputCodigoDoPais").attr("disabled", true);
     $("#inputCodigoDeArea").attr("disabled", true);
     $("#inputNumeroCelular").attr("disabled", true);
+    $("#jfldid").attr("disabled", true);
 }
 
 function resetarTelaUsuario(){
     $("#inputCodigoDoPais").attr("disabled", false);
     $("#inputCodigoDeArea").attr("disabled", false);
     $("#inputNumeroCelular").attr("disabled", false);
+    $("#jfldid").attr("disabled", false);
     $("#inputCodigoDoPais").val("");
     $("#inputCodigoDeArea").val("");
     $("#inputNumeroCelular").val("");   
-    configurarFormAtivacaoPIM(1);
-    carregarCaptcha();
+    $("#jfldid").val("");
+    //document.getElementById('coloca').innerHTML=""; 
+    //configurarFormAtivacaoPIM(1);
+    //carregarCaptcha();
+    //$("#divFormCaptcha").location.reload();
+    window.location.reload(true);
 }
