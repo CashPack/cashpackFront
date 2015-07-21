@@ -1,3 +1,32 @@
+$(function(){
+  var nomeGestor = $.cookie('username');
+  //alert("cookie: " + $.cookie('username'));
+  if ($.cookie('username') != null){
+    
+    if ($.cookie('username') == tipoGestor) {
+      //alert("TEM COOKIE");
+      $("#menuItemCadastroGestor").hide();
+      $("#menuItemPesquisarGestor").hide();
+      $("body").css("background-color", cor);
+      $("#infoBoasVindas").text("Olá senhor gestor "+nomeGestor+", bem vindo!");
+    }
+  }else{
+    //alert("SEM COOKIE");
+  }
+
+  $('#logoutbtn').on('click', function(e){
+    if($.removeCookie('username')) {
+    	var cookies = $.cookie();
+		for(var cookie in cookies) {
+			$.removeCookie('username', { path: '/' });
+   			$.removeCookie(cookie);
+		}
+      	var novaURL = "/index.html";
+      	$(window.document.location).attr('href',novaURL);
+    }
+  });
+});
+
 
 function carregarCrudUsuario(){
 	//alert("OK  - USUARIO");

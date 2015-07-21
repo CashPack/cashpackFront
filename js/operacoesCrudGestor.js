@@ -1,13 +1,8 @@
 $(document).ready(function(){
     
     verificarClassTela();
-    configurarFormAtivacaoPIM(1);
+  //  configurarFormAtivacaoPIM(1);
     configurarAlertaDeRespostas(1, "");
-
-    $("#labelCpf").hide();
-    $("#inputNumeroDocumentoCpf").hide();
-    $("#labelNome").hide();
-    $("#inputNome").hide();
 
     $("#inputNumeroDocumentoCnpj").focus(function () { 
         $(this).mask("99.999.999/9999-99"); 

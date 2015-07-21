@@ -4,9 +4,9 @@
     <meta name="description" content="Projeto WebCash">
     <meta name="author" content="Alex">
     <link rel="icon" href="/favicon.ico">
-    <title>CashPack - Agência</title>
+    <title>CashPack - Gestor</title>
     <script type="text/javascript">
-        window.history.replaceState('Object', 'Agência', "/pages/agencia.html");
+        window.history.replaceState('Object', 'Gestor', "/pages/gestor.html");
     </script>
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
         <div id="divMenuLateral"></div>
         
         <div id="divContentPrincipalCrud">
-             <h1 id="crudAgencia"  style="margin-left:25px;" class="page-header">AGÊNCIA</h1>
+             <h1 id="crudGestor"  style="margin-left:25px;" class="page-header">GESTOR</h1>
 
             <div style="margin-left:25px; width:50%;">
                 <div id="alertaDeRespostas" class="alert alert-success" role="alert"></div>
@@ -28,19 +28,15 @@
                     <div class="col-md-4" style="margin-right: 40px; height:500px; width:400px;">
                         <form id="form1" action="validarAtributosObrigatorios();" onChange="verificarTipo();" data-toggle="validator" role="group">
                             <div class="form-group">
-                                    <label>Tipo de agência:</label>
-                                    <select id="tipoDeAgencia" class="form-control">
-                                        <option>Pessoa Jurídica</option>
-                                        <option>Pessoa Física</option>
-                                    </select>
+                                <label id="labelCnpj">Cnpj:</label>
+                                <input id="inputNumeroDocumentoCnpj" type="text" class="form-control"
+                                placeholder="00.000.000/0000-00" required>
                             </div>
+
                             <div class="form-group">
                                 <label id="labelRazaoSocial">Razão Social:</label>
-                                <label id="labelNome">Nome:</label>
                                 <input id="inputRazaoSocial" type="text" class="form-control" 
                                 placeholder="Razão Social" required>
-                                <input id="inputNome" type="text" class="form-control"
-                                placeholder="Nome" required>
                             </div>
                             <div class="form-group" >
                                 <label>Nome Fantasia:</label>
@@ -48,21 +44,12 @@
                                 placeholder="Nome Fantasia" required>
                             </div>
                             <div class="form-group">
-                                <label id="labelCnpj">Cnpj:</label>
-                                <label id="labelCpf">Cpf:</label>
-                                <input id="inputNumeroDocumentoCnpj" type="text" class="form-control"
-                                placeholder="00.000.000/0000-00" required>
-                                <input id="inputNumeroDocumentoCpf" type="text" class="form-control"
-                                placeholder="000.000.000-00" required>
+                                <label>Número do celular:</label>
+                                <input id="inputNumeroCelular" type="text" class="form-control" placeholder="(00)'0'0000-0000" required>
                             </div>
                             <div class="form-group">
-                                    <label>Ramo de atividade:</label>
-                                    <select id="selectRamo" class="form-control">
-                                    </select>
-                            </div>
-                            <div class="form-group">
-                                    <label>Email:</label>
-                                    <input id="inputEmail" type="text" class="form-control"
+                                <label>Email:</label>
+                                <input id="inputEmail" type="text" class="form-control"
                                 placeholder="exemplo@exemplo.com" required>
                             </div>
                             <div class="form-group">
@@ -82,13 +69,9 @@
                                     </form>
                                 </div>
                             </div>
+
                             <div style="margin-top:25px;">
-                                <div class="form-group">
-                                    <label>Número do celular:</label>
-                                    <input id="inputNumeroCelular" type="text" class="form-control" placeholder="(00)'0'0000-0000"
-                                        required>
-                                </div>
-                                <button type="button" class="btn btn-success" onClick="enviarCadastroAgencia(inputNome, inputRazaoSocial, inputNomeFantasia, inputNumeroDocumentoCpf, inputNumeroDocumentoCnpj, selectRamo, inputEmail, inputNumeroCelular);">Enviar cadastro</button>
+                                <button type="button" class="btn btn-success" onClick="#">Enviar cadastro</button>
                             </div>
                         </form>
                     </div> 
@@ -130,11 +113,11 @@
     <script type="text/javascript" src="/js/jquery.cookie.js"></script>
     <script src="/js/operacoesCrudAgencia.js"></script>
     <script src="/js/jquery.maskedinput.min.js"></script>
+
     <link href="/css/estilo.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <!-- <script type="text/javascript" src="jquery.min.js"></script> -->
     <script type="text/javascript" src="/js/mapa.js"></script>
     <script type="text/javascript" src="/js/jquery-ui.custom.min.js"></script>
-
 
   </body>

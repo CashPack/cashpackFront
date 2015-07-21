@@ -1,5 +1,6 @@
 
 $(document).ready(function(){
+    
     verificarClassTela();
 	configurarFormAtivacaoPIM(1);
     configurarAlertaDeRespostas(1, "");
@@ -42,14 +43,15 @@ function enviarCadastroCelular(inputNumeroCelular){
                          contentType: "application/json; charset=utf-8",
                          dataType: "json",
                          processData: true,
+                         crossDomain : true,
                          success: function (data, xhr) {
-                            //alert("success... " + data.ERROR + "   COD: "+ xhr.status);
+                           // alert("success... " + data.ERROR + "   COD: "+ xhr.status);
                             configurarAlertaDeRespostas(data.status, data.ERROR);
                             
                          },
                          error: function (xhr) {
                             var erro = xhr.responseText;
-                            //alert("COD: "+ xhr.status + " MSG :" + erro);
+                           // alert("COD: "+ xhr.status + " MSG :" + erro);
                             configurarAlertaDeRespostas(xhr.status, "Pré-cadastro realizado com sucesso!");
                             
 

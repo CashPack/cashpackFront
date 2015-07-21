@@ -32,6 +32,7 @@
       }
     $(document).ready(function() {initMenu();});
     </script>
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
     <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header fixed-brand">
@@ -42,11 +43,17 @@
                 </div><!-- navbar-header-->
  
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav">
+                            <ul class="nav navbar-nav pull-right">
                                 <li class="active" ><button class="navbar-toggle collapse in" data-toggle="collapse" id="menu-toggle-2"> <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></button></li>
+                                <li>
+                                  <button style="margin-top:10px;" href="#" id="logoutbtn" class="btn btn-danger">Logout</button>
+                                </li>
+                                <li>
+                                  <a href="#"><p style="font-size:20px;">Bem vindo, Alex</p></a>
+                                </li>
                             </ul>
-                </div><!-- bs-example-navbar-collapse-1 -->
-    </nav>
+                  </div><!-- bs-example-navbar-collapse-1 -->
+
     <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
@@ -58,17 +65,29 @@
                     <a href="/pages/usuario.html" ><i class="glyphicon glyphicon-phone align-left"></i> Usuário</a>
                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a href="/pages/usuario.html"><i class="glyphicon glyphicon-plus align-left"></i> Cadastro</a></li>
-                        
+                        <li><a href="#"><span class="glyphicon glyphicon-zoom-in align-left"><i class="fa fa-flag fa-stack-1x "></i></span> Pesquisa</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="/pages/agencia.html" ><i class="glyphicon glyphicon-home align-left"></i> Agência</a>
                     <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a href="/pages/agencia.html"><span class="glyphicon glyphicon-plus align-left"><i class="fa fa-flag fa-stack-1x "></i></span> Cadastro</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-zoom-in align-left"><i class="fa fa-flag fa-stack-1x "></i></span> Pesquisa</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="glyphicon glyphicon-user align-left"></i> Gestor</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li id="menuItemPerfilGestor"><a href="/pages/perfilgestor.html"><span class="glyphicon glyphicon-user align-left"><i class="fa fa-flag fa-stack-1x "></i></span> Perfil</a></li>
+                        <li id="menuItemCadastroGestor"><a href="/pages/gestor.html"><span class="glyphicon glyphicon-plus align-left"><i class="fa fa-flag fa-stack-1x "></i></span> Cadastro</a></li>
+                        <li id="menuItemPesquisarGestor"><a href="#"><span class="glyphicon glyphicon-zoom-in align-left"><i class="fa fa-flag fa-stack-1x "></i></span> Pesquisa</a></li>
                     </ul>
                 </li>
             </ul>
         </div><!-- /#sidebar-wrapper -->
     </div>
+    <script src="/js/carregarLayout.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
 </body>
 </html>

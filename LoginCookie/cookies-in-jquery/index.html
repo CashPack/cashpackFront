@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <title>Managing Cookies with jQuery - Live Demo</title>
+  <meta name="author" content="Jake Rocheleau">
+  <link rel="shortcut icon" href="http://designshack.net/favicon.ico">
+  <link rel="icon" href="http://designshack.net/favicon.ico">
+  <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
+  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
+</head>
+
+<body>
+  <div id="topbar">
+  <a href="http://designshack.net">Back to Design Shack</a>
+  </div>
+  
+  <div id="w">
+    <div id="content">
+      <h1>Basic Cookie Management</h1>
+      <p>Login to the demo account with the following username/password: demo/demo</p>
+      
+      <form id="loginform" method="post" action="#">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" class="basic" placeholder="username...">
+        
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" class="basic">
+        
+        <input type="submit" name="submit" class="button" value="Login">
+      </form><!-- @end #loginform -->
+      
+      <div id="logindetails">
+        <!-- when user is logged in we display this div -->
+        <p>You are logged in as <strong>demo</strong>! The cookie is set to expire in 1 day from the original login.</p>
+        
+        <p>Want to logout? Easy!</p>
+        
+        <p id="logoutcontainer"><a href="#" id="logoutbtn" class="button">Logout Now</a></p>
+      </div><!-- @end #logindetails -->
+    </div><!-- @end #content -->
+  </div><!-- @end #w -->
+<script type="text/javascript">
+$(function(){
+  if($.cookie('username')) {
+    $('#loginform').hide();
+    $('#logindetails').show();
+  }
+  
+  $('#loginform').submit(function(e){
+    e.preventDefault();
+    var inputuname = $('#username').val();
+    var inputpass  = $('#password').val();
+    
+    if(inputuname == "demo" && inputpass == "demo") {
+      // successful validation and create cookie
+      $.cookie('username', 'demo', { expires: 1 });
+      var currentusr = $.cookie('username');
+      window.location.reload();
+    }
+  });
+  
+  $('#logoutbtn').on('click', function(e){
+    e.preventDefault();
+    if($.removeCookie('username')) {
+      $('#logoutcontainer').html('<strong>Successfully logged out! Refreshing the page now...</strong>');
+      window.setTimeout('location.reload()', 2000); // refresh after 2 sec
+    }
+  });
+});
+
+// expires after browser closes (session cookie)
+// $.cookie('username', 'demo');
+</script>
+</body>
+</html>
