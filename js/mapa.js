@@ -70,7 +70,7 @@ $(document).ready(function () {
 		});
 	});
 	
-	$("#txtEndereco").autocomplete({
+/*	$("#txtEndereco").autocomplete({
 		source: function (request, response) {
 			geocoder.geocode({ 'address': request.term + ', Brasil', 'region': 'BR' }, function (results, status) {
 				response($.map(results, function (item) {
@@ -91,7 +91,7 @@ $(document).ready(function () {
 			map.setCenter(location);
 			map.setZoom(16);
 		}
-	});
+	}); */
 	
 	$("form").submit(function(event) {
 		event.preventDefault();

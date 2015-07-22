@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/non-responsive.css" rel="stylesheet">
+   <!-- <link href="/css/non-responsive.css" rel="stylesheet"> -->
 
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
@@ -33,7 +33,7 @@
 
     <script type="text/javascript">
       $(function(){
-        $('#logindetails').hide();
+        $('#alertaDeRespostas').hide();
         if($.cookie('username')) {
           $('#loginform').hide();
           var novaURL = "principal.html";
@@ -47,17 +47,22 @@
           var inputuname = $('#username').val();
           var inputpass  = $('#password').val();
           
-          if(inputuname == "demo" && inputpass == "demo") {
+          if(inputuname == "admin" && inputpass == "admin") {
             // successful validation and create cookie
-            $.cookie('username', 'demo', { expires: 1 });
+            $.cookie('username', 'admin', { expires: 1 });
             var currentusr = $.cookie('username');
             window.location.reload();
           }
-          if(inputuname == "gestor" && inputpass == "demo") {
+          else if(inputuname == "gestor" && inputpass == "demo") {
             // successful validation and create cookie
             $.cookie('username', 'Alex', { expires: 1 });
             var currentusr = $.cookie('username');
             window.location.reload();
+          }
+          else{
+            $("#alertaDeRespostas").addClass("alert alert-danger");
+            $("#alertaDeRespostas").text("Ops! Usuário ou senha incorreto.");
+            $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
           }
         });
         
@@ -78,6 +83,9 @@
       </div>
       <form id="loginform" class="form-signin">
         <h3 align="center" class="form-signin-heading">Insira suas credenciais:</h3>
+        <div style="width:100%;">
+          <div id="alertaDeRespostas" class="alert alert-success" role="alert"></div>
+        </div>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="text" id="username" class="form-control" placeholder="Digite seu email" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
@@ -88,5 +96,6 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<script src="/assets/js/ie10-viewport-bug-workaround.js"></script>-->
     <script src="js/carregarLayout.js"></script>
+
   </body>
 </html>
