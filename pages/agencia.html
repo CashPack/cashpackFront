@@ -25,7 +25,7 @@
                 <div id="alertaDeRespostas" class="alert alert-success" role="alert"></div>
             </div>
 
-                    <div class="col-md-4" style="margin-right: 40px; height:500px; width:400px;">
+                    <div class="col-md-4" style="margin-right: 40px; height:500px; width:500px;">
                         <form id="form1" action="validarAtributosObrigatorios();" onChange="verificarTipo();" data-toggle="validator" role="group">
                             <div class="form-group">
                                     <label>Tipo de agência:</label>
@@ -46,6 +46,11 @@
                                 <label>Nome Fantasia:</label>
                             <input id="inputNomeFantasia" type="text" class="form-control" 
                                 placeholder="Nome Fantasia" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Número do celular:</label>
+                                <input id="inputNumeroCelular" type="text" class="form-control" placeholder="(00)'0'0000-0000"
+                                required>
                             </div>
                             <div class="form-group">
                                 <label id="labelCnpj">Cnpj:</label>
@@ -74,7 +79,8 @@
                                     value="Mostrar no mapa" class="btn btn-success" />
                                 </div>
                                 <div id="apresentacao">
-                                    <form method="post" action="index.html">    
+                                    <form method="post" action="index.html"> 
+                                            <p>Marque no mapa seu endereço.</p>   
                                             <div id="mapa"></div>
                                             <input type="hidden" value="Enviar" name="btnEnviar" />
                                             <input type="hidden" id="txtLatitude" name="txtLatitude" />
@@ -83,11 +89,6 @@
                                 </div>
                             </div>
                             <div style="margin-top:25px;">
-                                <div class="form-group">
-                                    <label>Número do celular:</label>
-                                    <input id="inputNumeroCelular" type="text" class="form-control" placeholder="(00)'0'0000-0000"
-                                        required>
-                                </div>
                                 <button type="button" class="btn btn-success" onClick="enviarCadastroAgencia(inputNome, inputRazaoSocial, inputNomeFantasia, inputNumeroDocumentoCpf, inputNumeroDocumentoCnpj, selectRamo, inputEmail, inputNumeroCelular);">Enviar cadastro</button>
                             </div>
                         </form>

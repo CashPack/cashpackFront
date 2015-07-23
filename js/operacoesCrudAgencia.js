@@ -1,14 +1,36 @@
 $(document).ready(function(){
-    
     verificarClassTela();
     configurarFormAtivacaoPIM(1);
     configurarAlertaDeRespostas(1, "");
+    aplicarMask();
+    carregarRamoDeAtividade();
 
     $("#labelCpf").hide();
     $("#inputNumeroDocumentoCpf").hide();
     $("#labelNome").hide();
     $("#inputNome").hide();
+});
 
+function carregarRamoDeAtividade(){
+    $select = $('#selectRamo');
+    $.ajax({
+        url: 'http://localhost:8080/cashpack/ramoDeAtividade',
+        dataType:'JSON',
+        success:function(data){
+            //clear the current content of the select
+            $select.html('');
+            //iterate over the data and append a select option
+            $.each(data, function(key, val){
+            $select.append('<option id="' + val.id + '">' + val.nome + '</option>');
+        })},
+        error:function(){
+            //if there is an error append a 'none available' option
+            $select.html('<option id="-1">Nenhum registro encontrado!</option>');
+        }
+    });
+}
+
+function aplicarMask(){
     $("#inputNumeroDocumentoCnpj").focus(function () { 
         $(this).mask("99.999.999/9999-99"); 
     }); 
@@ -23,31 +45,10 @@ $(document).ready(function(){
         } else { 
             element.mask("(99) 9999-9999?9"); 
         } 
-        });
-    //get a reference to the select element
-    $select = $('#selectRamo');
-    $.ajax({
-        url: 'http://localhost:8080/cashpack/ramoDeAtividade',
-        dataType:'JSON',
-        success:function(data){
-        //clear the current content of the select
-        $select.html('');
-        //iterate over the data and append a select option
-        $.each(data, function(key, val){
-        $select.append('<option id="' + val.id + '">' + val.nome + '</option>');
-        })},
-    error:function(){
-        //if there is an error append a 'none available' option
-        $select.html('<option id="-1">Nenhum registro encontrado!</option>');
-    }
     });
-    
-
-
-});
-
-function reset(){
-    //window.location.reload(true);
+    $("#txtEndereco").focus(function () { 
+        $(this).mask("99.999-999"); 
+    });
 }
 
 function verificarTipo(){
