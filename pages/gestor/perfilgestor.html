@@ -9,21 +9,22 @@
     <link rel="icon" href="/favicon.ico">
     <title>CashPack - Perfil do gestor</title>
     <script type="text/javascript">
-        window.history.replaceState('Object', 'Perfil Gestor', "/pages/perfilgestor.html");
+        window.history.replaceState('Object', 'Perfil Gestor', "/pages/gestor/perfilgestor.html");
     </script>
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/carregarLayout.css" rel="stylesheet">
 
   </head>
-  <body>
+  <body id="bodyPage">
     <div class="container-fluid">
       <div class="row">
         <div id="divMenuLateral"></div>
         
-        <div id="divContentPrincipalCrud">
+        <div id="divContentPrincipalCrud" class="divContentP">
             <div style="margin-left:25px;max-width:90%;">
                 <h1 class="page-header">MEU PERFIL</h1>
-                <h2>Nível de classificação atual: Bronze</h2>
+                <h2 id="nivelClassificacao"></h2>
                 <div>
                     <h2 class="page-header">Informações</h2>
                         <div class="row" align="center">
@@ -66,4 +67,10 @@
 
   </body>
   <script src="/js/operacoesCrudPerfilGestor.js"></script>
+  <script type="text/javascript">
+    var nivelClassificacaoGestor = $.cookie('nivelGestor');
+    $("#nivelClassificacao").text(" Nível de classificação atual: "+nivelClassificacaoGestor);
+  
+   
+  </script>
 </html>

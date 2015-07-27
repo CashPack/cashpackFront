@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
     
     verificarClassTela();
@@ -38,7 +37,7 @@ function enviarCadastroCelular(inputNumeroCelular){
                     };
                      $.ajax({
                          type: "POST",
-                         url: "http://localhost:8080/cashpack/usuariocashpacks/cadastrarUsuarioCashPack",
+                         url: urlWebService+"/usuariocashpacks/cadastrarUsuarioCashPack",
                          data: JSON.stringify(bookData),
                          contentType: "application/json; charset=utf-8",
                          dataType: "json",
@@ -76,7 +75,7 @@ function validarPIM(inputNumeroCelular, inputPIN){
                     };
                      $.ajax({
                          type: "POST",
-                         url: "http://localhost:8080/cashpack/usuariocashpacks/confirmarPinUsuarioCashPack",
+                         url: urlWebService+"/usuariocashpacks/confirmarPinUsuarioCashPack",
                          data: JSON.stringify(bookData),
                          contentType: "application/json; charset=utf-8",
                          dataType: "json",

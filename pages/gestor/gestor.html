@@ -4,43 +4,40 @@
     <meta name="description" content="Projeto WebCash">
     <meta name="author" content="Alex">
     <link rel="icon" href="/favicon.ico">
-    <title>CashPack - Agência</title>
+    <title>CashPack - Gestor</title>
     <script type="text/javascript">
-        window.history.replaceState('Object', 'Agência', "/pages/agencia.html");
+        window.history.replaceState('Object', 'Gestor', "/pages/gestor/gestor.html");
     </script>
     <!-- Bootstrap core CSS -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/carregarLayout.css" rel="stylesheet">
 
 
-    <body>
+    <body id="body">
     <!--<div id="navBar"></div>-->
     <div class="container-fluid">
       <div class="row">
         <div id="divMenuLateral"></div>
         
-        <div id="divContentPrincipalCrud">
-             <h1 id="crudAgencia"  style="margin-left:25px;" class="page-header">AGÊNCIA</h1>
+        <div id="divContentPrincipalCrud" class="divContentP">
+             <h1 id="crudGestor"  style="margin-left:25px;" class="page-header">GESTOR</h1>
 
             <div style="margin-left:25px; width:50%;">
                 <div id="alertaDeRespostas" class="alert alert-success" role="alert"></div>
             </div>
 
                     <div class="col-md-4" style="margin-right: 40px; height:500px; width:500px;">
-                        <form id="form1" action="validarAtributosObrigatorios();" onChange="verificarTipo();" data-toggle="validator" role="group">
+                        <form id="form1" action="validarAtributosObrigatorios();" data-toggle="validator" role="group">
                             <div class="form-group">
-                                    <label>Tipo de agência:</label>
-                                    <select id="tipoDeAgencia" class="form-control">
-                                        <option>Pessoa Jurídica</option>
-                                        <option>Pessoa Física</option>
-                                    </select>
+                                <label id="labelCnpj">Cnpj:</label>
+                                <input id="inputNumeroDocumentoCnpj" type="text" class="form-control"
+                                placeholder="00.000.000/0000-00" required>
                             </div>
+
                             <div class="form-group">
                                 <label id="labelRazaoSocial">Razão Social:</label>
-                                <label id="labelNome">Nome:</label>
                                 <input id="inputRazaoSocial" type="text" class="form-control" 
                                 placeholder="Razão Social" required>
-                                <input id="inputNome" type="text" class="form-control"
-                                placeholder="Nome" required>
                             </div>
                             <div class="form-group" >
                                 <label>Nome Fantasia:</label>
@@ -49,25 +46,11 @@
                             </div>
                             <div class="form-group">
                                 <label>Número do celular:</label>
-                                <input id="inputNumeroCelular" type="text" class="form-control" placeholder="(00)'0'0000-0000"
-                                required>
+                                <input id="inputNumeroCelular" type="text" class="form-control" placeholder="(00)'0'0000-0000" required>
                             </div>
                             <div class="form-group">
-                                <label id="labelCnpj">Cnpj:</label>
-                                <label id="labelCpf">Cpf:</label>
-                                <input id="inputNumeroDocumentoCnpj" type="text" class="form-control"
-                                placeholder="00.000.000/0000-00" required>
-                                <input id="inputNumeroDocumentoCpf" type="text" class="form-control"
-                                placeholder="000.000.000-00" required>
-                            </div>
-                            <div class="form-group">
-                                    <label>Ramo de atividade:</label>
-                                    <select id="selectRamo" class="form-control">
-                                    </select>
-                            </div>
-                            <div class="form-group">
-                                    <label>Email:</label>
-                                    <input id="inputEmail" type="text" class="form-control"
+                                <label>Email:</label>
+                                <input id="inputEmail" type="text" class="form-control"
                                 placeholder="exemplo@exemplo.com" required>
                             </div>
                             <div class="form-group">
@@ -79,8 +62,8 @@
                                     value="Mostrar no mapa" class="btn btn-success" />
                                 </div>
                                 <div id="apresentacao">
-                                    <form method="post" action="index.html"> 
-                                            <p>Marque no mapa seu endereço.</p>   
+                                    <form method="post" action="index.html">  
+                                            <p>Marque no mapa seu endereço.</p>     
                                             <div id="mapa"></div>
                                             <input type="hidden" value="Enviar" name="btnEnviar" />
                                             <input type="hidden" id="txtLatitude" name="txtLatitude" />
@@ -88,15 +71,36 @@
                                     </form>
                                 </div>
                             </div>
-                            <div style="margin-top:25px;">
-                                <button type="button" class="btn btn-success" onClick="enviarCadastroAgencia(inputNome, inputRazaoSocial, inputNomeFantasia, inputNumeroDocumentoCpf, inputNumeroDocumentoCnpj, selectRamo, inputEmail, inputNumeroCelular);">Enviar cadastro</button>
+                            <div class="form-group">
+                                <label>Por favor, leia atentamente os termos de contrato abaixo.</label>
+                                <object width="1000" height="300">
+                                <param name="movie" value="http://sitecontabil.com.br/formularios/termo_homologacao_rescisao.pdf"></param>
+                                <param name="allowFullScreen" value="true"></param>
+                                <param name="allowscriptaccess" value="always"></param>
+                                <embed src="http://elloscloud.com/resources/pdf/termos_e_servicos.pdf"
+                                  type="application/pdf"
+                                  allowscriptaccess="always"
+                                  allowfullscreen="true"
+                                  width="426"
+                                  height="300">
+                                </embed>
+                                </object>
+                                <div class="checkbox">
+                                    <label>
+                                      <input id="termosCheckBox" type="checkbox">Eu li e aceito os termos e condições.
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top:25px; height:100px;">
+                                <button type="button" class="btn btn-success" onClick="enviarCadastroGestor(inputNumeroDocumentoCnpj, inputRazaoSocial, inputNomeFantasia, inputNumeroCelular, inputEmail, txtEndereco);">Enviar cadastro</button>
                             </div>
                         </form>
                     </div> 
                     <br>
                     <br>
 
-                    <div id="formAtivacaoPIM" style="margin-left:50px;">
+                    <div id="formAtivacaoPIM" style="margin-left:50px;background-color:#fff;">
                         <h2>Valídar código PIN</h2>
                         <h4>Você receberá um código PIN no número cadastro.</h4>
                         <div class="form-inline">
@@ -104,7 +108,7 @@
                                 <label>Digite o código do PIN:</label>
                                 <input id="inputPIN" type="text" class="form-control" placeholder="4e70">
                             </div>
-                            <button type="submit" class="btn btn-default" OnClick="validarPIM(inputNome, inputRazaoSocial, inputNomeFantasia, inputNumeroDocumentoCpf, inputNumeroDocumentoCnpj, selectRamo,inputEmail, inputNumeroCelular, inputPIN);"
+                            <button type="submit" class="btn btn-default" OnClick="validarPIN(inputNumeroCelular, inputPIN);"
                             >Validar PIN</button>
                         </div>
                     </div>
@@ -126,17 +130,18 @@
     <script src="/js/ie10-viewport-bug-workaround.js"></script>
     
     <script src="/js/jquery.min.js"></script>
-    <script src="/js/carregarLayout.js"></script>
+    
     <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/js/jquery.cookie.js"></script>
-    <script src="/js/operacoesCrudAgencia.js"></script>
+    <script src="/js/operacoesCrudGestor.js"></script>
     <script src="/js/jquery.maskedinput.min.js"></script>
-    
-    
+
+    <link href="/css/estilo.css" type="text/css" rel="stylesheet" />
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <!-- <script type="text/javascript" src="jquery.min.js"></script> -->
     <script type="text/javascript" src="/js/mapa.js"></script>
     <script type="text/javascript" src="/js/jquery-ui.custom.min.js"></script>
 
-    <link href="/css/estilo.css" type="text/css" rel="stylesheet" />
+    <script src="/js/carregarLayout.js"></script>
+
   </body>

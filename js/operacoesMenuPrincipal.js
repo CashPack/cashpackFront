@@ -1,24 +1,25 @@
 $(function(){
-  var nomeGestor = $.cookie('username');
+  var nomeGestor = $.cookie('usuario');
   //alert("cookie: " + $.cookie('username'));
-  if ($.cookie('username') != null){
+  if ($.cookie('usuario') != null){
     
-    if ($.cookie('username') == tipoGestor) {
+    if ($.cookie('tipoUsuario') == "br.com.cashpack.model.Gestor") {
       //alert("TEM COOKIE");
       $("#menuItemCadastroGestor").hide();
       $("#menuItemPesquisarGestor").hide();
-      $("body").css("background-color", cor);
-      $("#infoBoasVindas").text("Olá senhor gestor "+nomeGestor+", bem vindo!");
+    }
+    if ($.cookie('tipoUsuario') == "br.com.cashpack.model.Agencia") {
+      $("#menuGestor").hide();
     }
   }else{
     //alert("SEM COOKIE");
   }
 
   $('#logoutbtn').on('click', function(e){
-    if($.removeCookie('username')) {
+    if($.removeCookie('usuario')) {
     	var cookies = $.cookie();
 		for(var cookie in cookies) {
-			$.removeCookie('username', { path: '/' });
+			$.removeCookie('usuario', { path: '/' });
    			$.removeCookie(cookie);
 		}
       	var novaURL = "/index.html";

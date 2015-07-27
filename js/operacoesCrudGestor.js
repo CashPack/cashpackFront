@@ -59,7 +59,7 @@ function enviarCadastroGestor(inputNumeroDocumentoCnpj, inputRazaoSocial, inputN
         };
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/cashpack/gestor/cadastrarGestor",
+            url: urlWebService+"/gestor/cadastrarGestor",
             data: JSON.stringify(bookData),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -80,76 +80,39 @@ function enviarCadastroGestor(inputNumeroDocumentoCnpj, inputRazaoSocial, inputN
     }
 }
 
-function validarPIM(inputNumeroDocumentoCnpj, inputRazaoSocial, inputNomeFantasia, inputNumeroCelular, inputEmail, txtEndereco, inputPIN){
-    
-    var nomeFantasia = inputNomeFantasia.value;
-    var email = inputEmail.value;
+function validarPIN(inputNumeroCelular,inputPIN){
     var numeroCelular = inputNumeroCelular.value;
-    //alert("DIGITOS:"+numeroDocumentoReplace+"-");
-    var tipoDeDocumento;
-    if ($("#inputNumeroDocumentoCpf").is(":visible")) {
-        var numeroDocumento = inputNumeroDocumentoCpf.value;
-        var numeroDocumentoReplace = numeroDocumento.replace("/","").replace("-","").replace(".","").replace(".","").replace(".","");
-        if (numeroDocumentoReplace.length == 11) {
-            tipoDeDocumento = "CPF";
-            var razaoSocial = inputNome.value;
-        }
-    }
-    if ($("#inputNumeroDocumentoCnpj").is(":visible")) {
-        var numeroDocumento = inputNumeroDocumentoCnpj.value;
-        var numeroDocumentoReplace = numeroDocumento.replace("/","").replace("-","").replace(".","").replace(".","").replace(".","");
-        if (numeroDocumentoReplace.length == 14){
-            tipoDeDocumento = "CNPJ";
-            var razaoSocial = inputRazaoSocial.value;
-        }
-    }
-
-    var idRamoDeAtividade = $('#selectRamo option:selected').attr("id");
-    var ramoDeAtividade = $('#selectRamo option:selected').text();
-    var versionRamoDeAtividade = $('#selectRamo option:selected').attr("version");
-    var numeroUsuarioRecebido = inputNumeroCelular.value;
-    var numeroPimRecebido = inputPIN.value;
-
-    //alert("codigoDoPais: "+ codigoDoPaisRecebido + "   codigoDeArea: "+ codigoDeAreaRecebido +"   numeroUsuarioRecebido: "+ numeroUsuarioRecebido
-    //  + "PIM: "+numeroPimRecebido);
-
-     var bookData = {  
-        "nomeFantasia":nomeFantasia,
-        "razaoSocial":razaoSocial,
-        "email":email,
-        "numeroDocumento":numeroDocumentoReplace,
-        "tipoDeDocumentoAgenciaEnum":tipoDeDocumento,
-            "ramoDeAtividade":{  
-                "nome":ramoDeAtividade,
-                "id":idRamoDeAtividade,
-                "version":versionRamoDeAtividade
+    var numeroPin =     inputPIN.value;
+    var bookData = {
+            "aceitouOsTermosDeContrato":true,
+            "telefone":
+                    {
+                    "codPais":"55",
+                    "numero":numeroCelular
             },
-            "telefone":{  
-                "codPais":"55",
-                "numero":numeroCelular,
-            },
-            "codigoPin":{  
-                "codigo":numeroPimRecebido
+            "codigoPin":
+                    {
+                    "codigo":numeroPin
             }
-        };
-                     $.ajax({
-                         type: "POST",
-                         url: "http://localhost:8080/cashpack/agencia/confirmarPinAgencia",
-                         data: JSON.stringify(bookData),
-                         contentType: "application/json; charset=utf-8",
-                         dataType: "json",
-                         processData: true,
-                         success: function (data, status, jqXHR) {
-                           // alert("success... " + data.ERROR);
-                            configurarAlertaDeRespostas(data.status, data.ERROR);
-                         },
-                         error: function (xhr) {
-                            var erro = xhr.responseText;
-                            //alert("COD: "+ xhr.status + "   TIPO ERRO: " + xhr.statusText + "    MSG :" + erro);
-                            configurarAlertaDeRespostas(xhr.status,  "Agência cadastrada com suscesso!");
-                            resetarTelaAgencia();
-                         }
-                     });
+    };
+        $.ajax({
+            type: "POST",
+            url: urlWebService+"/gestor/confirmarPinGestor",
+            data: JSON.stringify(bookData),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            processData: true,
+            success: function (data, status, jqXHR) {
+                // alert("success... " + data.ERROR);
+                configurarAlertaDeRespostas(data.status, data.ERROR);
+            },
+            error: function (xhr) {
+                var erro = xhr.responseText;
+                //alert("COD: "+ xhr.status + "   TIPO ERRO: " + xhr.statusText + "    MSG :" + erro);
+                configurarAlertaDeRespostas(xhr.status,  "Gestor cadastrado com suscesso!");
+                resetarTelaGestor();
+            }
+        });
 }
 
 function verificarClassTela(){
@@ -221,6 +184,7 @@ function desabilitarCamposDeCadastro(){
     $("#inputNumeroCelular").attr("disabled", true);
     $("#inputEmail").attr("disabled", true);
     $("#txtEndereco").attr("disabled", true);
+    $("#btnEndereco").attr("disabled", true);
     $("#termosCheckBox").attr("disabled", true);
 }
 
@@ -332,5 +296,10 @@ function validarCampo(codigo, texto, id){
 
 function redirecionarParaTopo(){
     window.location.hash = '#crudGestor';
-    window.history.replaceState('Object', 'Gestor', "/pages/gestor.html");
+    window.history.replaceState('Object', 'Gestor', "/pages/gestor/gestor.html");
+}
+
+function resetarTelaGestor(){
+    var novaURL = "/pages/gestor/gestor.html";
+    $(window.document.location).attr('href',novaURL);
 }

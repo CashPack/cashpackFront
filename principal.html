@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/carregarLayout.css" rel="stylesheet">
     <!--<link href="/css/non-responsive.css" rel="stylesheet">-->
 
     <link href="css/dashboard.css" rel="stylesheet">
@@ -22,14 +23,16 @@
 
 
   </head>
-  <body>
+  <body id="bodyPage">
         <div id="divMenuLateral" style="margin-top:55px;"></div>
-        <div id="divContentPrincipal" class="container" style="margin-top:5px; margin-left:250px;max-width:100%;">
+        <div id="divContentPrincipal" class="divContentP container" style="margin-top:5px; float:right;">
                 <div align="center">
                     <div class="page-header" style="max-width:90%;">
                         <img style="width:40%;" src="image/logoComTexto.gif">
                     </div>
-                    <h1 id="infoBoasVindas">Sua moeda virtual!</h1>
+                    <div id="infoBoasVindas" align="center">
+                        <h1 id="nomeUsuario"></h1>
+                    </div>
                 </div>
         </div>
         <div id="divFooter"></div>
@@ -50,9 +53,34 @@
     <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
     <script src="js/carregarLayout.js"></script>
-
-    
-
+    <script type="text/javascript">
+        var usuario = $.cookie('usuario');
+        var nivelGestor = $.cookie('nivelGestor');
+        if ($.cookie('tipoUsuario') == "br.com.cashpack.model.Gestor") {
+            $("#nomeUsuario").text("Olá gestor "+usuario+",bem vindo.");
+            if(nivelGestor == 'BRONZE'){
+                $("#bodyPage").css("background-color", '#CD7F32');
+            }
+            if(nivelGestor == 'PRATA'){
+                $("#bodyPage").css("background-color", '#c0c0c0');
+            }
+            if(nivelGestor == 'OURO'){
+                $("#bodyPage").css("background-color", '#ffd700');
+            }
+            if(nivelGestor == 'ESMERALDA'){
+                $("#bodyPage").css("background-color", '#50c878');
+            }
+            if(nivelGestor == 'RUBY'){
+                $("#bodyPage").css("background-color", '#9b111e');
+            }
+            if(nivelGestor == 'DIAMANTE'){
+                $("#bodyPage").css("background-color", '#34526f');
+            }
+        }else{
+            $("#nomeUsuario").text("Olá agência "+usuario+",bem vindo.");      
+        }
+        
+    </script>
 
   </body>
 </html>

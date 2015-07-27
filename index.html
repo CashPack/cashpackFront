@@ -34,19 +34,64 @@
     <script type="text/javascript">
       $(function(){
         $('#alertaDeRespostas').hide();
-        if($.cookie('username')) {
-          $('#loginform').hide();
+        if($.cookie('usuario')) {
+          //$('#loginform').hide();
+         // alert("TEM cookie");
           var novaURL = "principal.html";
           $(window.document.location).attr('href',novaURL);
           
-          $('#logindetails').show();
+          //$('#logindetails').show();
         }
         
         $('#loginform').submit(function(e){
           e.preventDefault();
           var inputuname = $('#username').val();
           var inputpass  = $('#password').val();
+          var dados = {
+            "login": inputuname,"senha": inputpass
+            //"login": "teste@asdas.com","senha": "asd123"
+          };
+          $.ajax({
+            type: "POST",
+            url: urlWebService+"/usuarioCredenciavel/login",
+            data: JSON.stringify(dados),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            processData: true,
+            success: function (data, xhr) {
+               // alert("RETORNO: " + data.INSTANCE.cnpj + "   COD: "+ xhr);
+                var tipoUsuarioCookie = data.CLASSNAME;
+                var nivelGestorCookie = data.INSTANCE.classificacaoEnum;
+                var idUsuarioCookie = data.INSTANCE.id;
+                var usuarioCookie = data.INSTANCE.razaoSocial;
+                var cnpjCookie = data.INSTANCE.cnpj;
+                var razaoSocialCookie = data.INSTANCE.razaoSocial;
+                var nomeFantasiaCookie = data.INSTANCE.nomeFantasia;
+                var statusGestorCookie = data.INSTANCE.statusGestorEnum;
+                if (tipoUsuarioCookie == "br.com.cashpack.model.Gestor") {
+                  $.cookie('nivelGestor', nivelGestorCookie, { expires: 1 });
+                }
+                $.cookie('tipoUsuario', tipoUsuarioCookie, { expires: 1 });
+                $.cookie('idUsuario', idUsuarioCookie, { expires: 1 });
+                $.cookie('usuario', usuarioCookie, { expires: 1 });
+                $.cookie('cnpj', cnpjCookie, { expires: 1 });
+                $.cookie('razaoSocial', razaoSocialCookie, { expires: 1 });
+                $.cookie('nomeFantasia', nomeFantasiaCookie, { expires: 1 });
+                $.cookie('statusGestor', statusGestorCookie, { expires: 1 });
+                //var currentusr = $.cookie('username');
+                window.location.reload();
+            },
+            error: function (xhr) {
+                var erro = xhr.statusText;
+                var codErro = xhr.status;
+                //alert("RETORNO: error "+ xhr.status + " MSG :" + erro);
+                $("#alertaDeRespostas").addClass("alert alert-danger");
+                $("#alertaDeRespostas").text("Ops! Usuário ou senha incorreto.");
+                $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
+            }
+        });
           
+        /*  
           if(inputuname == "admin" && inputpass == "admin") {
             // successful validation and create cookie
             $.cookie('username', 'admin', { expires: 1 });
@@ -64,9 +109,10 @@
             $("#alertaDeRespostas").text("Ops! Usuário ou senha incorreto.");
             $("#alertaDeRespostas").show('fast').delay(3000).fadeOut(1000);
           }
+        
+        
+        */
         });
-        
-        
       });
 
       // expires after browser closes (session cookie)
@@ -79,7 +125,7 @@
 
     <div class="container">
       <div align="center">
-          <img src="image/logoComTexto.gif">
+          <img src="/image/logoComTexto.gif">
       </div>
       <form id="loginform" class="form-signin">
         <h3 align="center" class="form-signin-heading">Insira suas credenciais:</h3>

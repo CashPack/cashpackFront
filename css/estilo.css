@@ -28,9 +28,9 @@
 }
 
 .campos input[type="text"] { 
-	float: left;
+ 	float: none;
 	padding: 9px;
-	width: 320px; 
+	width: 470px; 
 }
 
 .campos input[type="button"] { 

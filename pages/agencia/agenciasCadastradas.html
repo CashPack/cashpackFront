@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" header="Access-Control-Allow-Origin: *">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Projeto WebCash">
+    <meta name="author" content="Alex">
+    <link rel="icon" href="/favicon.ico">
+    <title>CashPack - Agências</title>
+    <script type="text/javascript">
+        window.history.replaceState('Object', 'Agências', "/pages/agencia/agenciasCadastradas.html");
+    </script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/carregarLayout.css" rel="stylesheet">
+
+  </head>
+  <body id="bodyPage">
+    <div class="container-fluid">
+      <div class="row">
+        <div id="divMenuLateral"></div>
+        
+        <div id="divContentPrincipalCrud" class="divContentP">
+            <div style="margin-left:25px;max-width:90%;">
+                <h1 class="page-header">Minhas Agências</h1>
+                <table id="table-style" data-url="http://localhost:8080/cashpack/agencia" data-height="400" data-row-style="rowStyle" 
+                data-toolbar="#toolbar"
+           data-search="true"
+           data-show-refresh="true"
+           data-show-toggle="true"
+           data-show-columns="true"
+           data-show-export="true"
+           data-pagination="true"
+           >
+                    <thead>
+                        <tr>
+                            <th data-field="id" class="col-md-1">
+                                <i class="glyphicon glyphicon-user"></i>
+                                ID Agência
+                            </th>
+                            <th data-field="razaoSocial" class="col-md-4">
+                                <i class="glyphicon glyphicon-star"></i>
+                                Razão Social
+                            </th>
+                            <th data-field="nomeFantasia" class="col-md-2">
+                                <i class="glyphicon glyphicon-th-list"></i>
+                                Nome Fantasia
+                            </th>
+                          <!--  <th data-field="telefone" class="col-md-2">
+                                <i class="glyphicon glyphicon-exclamation-sign"></i>
+                                Contato
+                            </th>
+                            <th data-field="gestor" class="col-md-2">
+                                <i class="glyphicon glyphicon-user"></i>
+                                Gestor
+                            </th>
+                        -->
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div id="divFooter"></div>
+       </div>
+    </div>
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="/js/holder.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.cookie.js"></script>
+    
+    <script src="/js/carregarLayout.js"></script>
+
+
+    <script src="bootstrap-table.js"></script>
+    <link href="bootstrap-table.css" rel="stylesheet">
+    
+    <script>
+    $(function () {
+        var classes = 'table table-hover';
+        $('#table-style').bootstrapTable('destroy').bootstrapTable({
+            classes: classes
+        });
+
+        /*$('#hover, #striped, #condensed').click(function () {
+
+            var classes = 'table table-condensed';
+
+            if ($('#hover').prop('checked')) {
+                classes += ' table-hover';
+            }
+            if ($('#condensed').prop('checked')) {
+                classes += ' table-condensed';
+            }
+            $('#table-style').bootstrapTable('destroy')
+                .bootstrapTable({
+                    classes: classes,
+                    striped: $('#striped').prop('checked')
+                });
+        });
+        */
+    });
+
+    function rowStyle(row, index) {
+        var classes = ['active', 'success', 'info', 'warning', 'danger'];
+
+        if (index % 2 === 0 && index / 2 < classes.length) {
+            return {
+                classes: classes[index / 2]
+            };
+        }
+        return {};
+    }
+</script>
+  </body>
+  <script src="/js/operacoesListagem.js"></script>
+</html>
