@@ -36,7 +36,7 @@
         $('#alertaDeRespostas').hide();
         if($.cookie('usuario')) {
           //$('#loginform').hide();
-         // alert("TEM cookie");
+          //alert("TEM cookie");
           var novaURL = "principal.html";
           $(window.document.location).attr('href',novaURL);
           
@@ -61,9 +61,14 @@
             success: function (data, xhr) {
                // alert("RETORNO: " + data.INSTANCE.cnpj + "   COD: "+ xhr);
                 var tipoUsuarioCookie = data.CLASSNAME;
+                if (tipoUsuarioCookie == "br.com.cashpack.model.AdministradorDoSistema") {
+                  var usuarioCookie = data.INSTANCE.nome;
+                }else{
+                  var usuarioCookie = data.INSTANCE.razaoSocial;
+                }
                 var nivelGestorCookie = data.INSTANCE.classificacaoEnum;
                 var idUsuarioCookie = data.INSTANCE.id;
-                var usuarioCookie = data.INSTANCE.razaoSocial;
+                
                 var cnpjCookie = data.INSTANCE.cnpj;
                 var razaoSocialCookie = data.INSTANCE.razaoSocial;
                 var nomeFantasiaCookie = data.INSTANCE.nomeFantasia;

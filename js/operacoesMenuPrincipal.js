@@ -7,12 +7,19 @@ $(function(){
       //alert("TEM COOKIE");
       $("#menuItemCadastroGestor").hide();
       $("#menuItemPesquisarGestor").hide();
+      $("#menuItemPerfilAgencia").hide();
     }
     if ($.cookie('tipoUsuario') == "br.com.cashpack.model.Agencia") {
       $("#menuGestor").hide();
+      $("#menuItemCadastroAgencia").hide();
+      $("#menuItemPesquisarAgencia").hide();
+    }
+    if ($.cookie('tipoUsuario') == "br.com.cashpack.model.AdministradorDoSistema") {
+    	$("#menuItemPerfilGestor").hide();
+    	$("#menuItemPerfilAgencia").hide();
     }
   }else{
-    //alert("SEM COOKIE");
+    alert("SEM COOKIE");
   }
 
   $('#logoutbtn').on('click', function(e){

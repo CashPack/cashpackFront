@@ -1,5 +1,5 @@
-//var urlWebService = "http://52.27.68.85:8080/cashpack";
-var urlWebService = "http://localhost:8080/cashpack";
+var urlWebService = "http://52.27.68.85:8080/cashpack";
+//var urlWebService = "http://localhost:8080/cashpack";
 var tipoGestor = "Alex";
 var cor = "#ac9231";
 

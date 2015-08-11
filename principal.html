@@ -76,8 +76,11 @@
             if(nivelGestor == 'DIAMANTE'){
                 $("#bodyPage").css("background-color", '#34526f');
             }
-        }else{
+        }if ($.cookie('tipoUsuario') == "br.com.cashpack.model.Agencia") {
             $("#nomeUsuario").text("Olá agência "+usuario+",bem vindo.");      
+        }
+        if ($.cookie('tipoUsuario') == "br.com.cashpack.model.AdministradorDoSistema") {
+            $("#nomeUsuario").text("Olá administrador "+usuario+",bem vindo.");      
         }
         
     </script>
